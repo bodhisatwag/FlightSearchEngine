@@ -1,0 +1,87 @@
+.flight-search-engine {
+    padding: 20px;
+
+    .fse-header {
+        padding: 15px;
+        border: 1px solid black;
+        font-size: 24px;
+    }
+
+    .fse-body {
+        padding: 15px;
+        border: 1px solid black;
+        display: flex;
+
+        .fse-criteria {
+            width: 30%;
+            padding: 10px;
+            border: 1px solid black;
+
+            .searh-panel {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+
+        .fse-results {
+            width: 70%;
+            padding: 10px;
+            border: 1px solid black;
+
+            .fse-results-header {
+                padding: 10px;
+                border: 1px solid black;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .fse-results-header-title {
+                    font-size: 20px;
+                }
+
+                .fse-results-header-schedule {
+                    font-size: 12px;
+                }
+            }
+
+            .fse-results-body {
+                display: flex;
+                margin-top: 10px;
+                border: 1px solid rgb(107, 93, 93);
+
+                .fse-details {
+                    width: 70%;
+                    padding: 10px;
+
+                    .flight-amount {
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                    }
+
+                    .flight-directions {
+                        display: flex;
+                        justify-content: space-between;
+
+                        .flight-number {
+                            font-size: 11px;
+                            margin-bottom: 5px;
+                        }
+
+                        .flight-timing {
+                            .timing-value {
+                                font-size: 14px;
+                            }
+                        }
+                    }
+                }
+
+                .fse-booking {
+                    width: 30%;
+                    justify-content: center;
+                    align-items: center;
+                    display: flex;
+                }
+            }
+        }
+    }
+}

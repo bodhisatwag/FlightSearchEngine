@@ -1,0 +1,107 @@
+<div class="flight-search-engine">
+    <div class="fse-header">Flight Search Engine</div>
+    <div class="fse-body">
+        <div class="fse-criteria">
+            <mat-tab-group>
+                <mat-tab label="One way">
+                    <ng-container *ngTemplateOutlet="searchTpl"></ng-container>
+                </mat-tab>
+                <mat-tab label="Return">
+                    <ng-container *ngTemplateOutlet="searchTpl"></ng-container>
+                </mat-tab>
+            </mat-tab-group>
+
+            <mat-slider min="1000" max="10000" step="1" value="2000"></mat-slider>
+        </div>
+        <div class="fse-results">
+            <div class="fse-results-header">
+                <div class="fse-results-header-title">
+                    Pune > Delhi > Pune
+                </div>
+                <div class="fse-results-header-schedule">
+                    <div class="depart">
+                        <span class="label">Depart: </span>
+                        <span class="value">1st Jan 2012</span>
+                    </div>
+                    <div class="return">
+                        <span class="label">Return: </span>
+                        <span class="value">10th Jan 2012</span>
+                    </div>
+                </div>
+            </div>
+            <div class="fse-results-body">
+                <div class="fse-details">
+                    <ng-container *ngTemplateOutlet="flightsTpl"></ng-container>
+                </div>
+                <div class="fse-booking">
+                    <button mat-raised-button color="primary">Book this Flight</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #searchTpl>
+    <div class="searh-panel" [formGroup]="flightSearchForm">
+        <mat-form-field>
+            <input matInput placeholder="Enter Origin City" formControlName="originCity">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Enter Destination City" formControlName="destinationCity">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="departureDate" placeholder="Departure date"
+                formControlName="destinationCity">
+            <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="returnDate" placeholder="Return date" formControlName="destinationCity">
+            <mat-datepicker-toggle matSuffix [for]="returnDate"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Passengers</mat-label>
+            <mat-select formControlName="destinationCity">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="accent">Search</button>
+    </div>
+</ng-template>
+
+<ng-template #flightsTpl>
+    <div class="flight-amount">
+        Rs 9,500.00
+    </div>
+    <div class="flight-directions">
+        <ng-container *ngTemplateOutlet="flightDetails"></ng-container>
+        <ng-container *ngTemplateOutlet="flightDetails"></ng-container>
+    </div>
+</ng-template>
+
+<ng-template #flightDetails>
+    <div class="flight-oneway">
+        <div class="flight-number">
+            AI-202
+        </div>
+        <div class="flight-direction">
+            PQN > DEL
+        </div>
+        <div class="flight-timing">
+            <span class="timing-label">Depart: </span>
+            <span class="timing-value">10:00 AM</span>
+        </div>
+        <div class="flight-timing">
+            <span class="timing-label">Arrive: </span>
+            <span class="timing-value">12:00 PM</span>
+        </div>
+    </div>
+</ng-template>
