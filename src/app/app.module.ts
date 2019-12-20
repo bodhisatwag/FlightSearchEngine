@@ -9,6 +9,7 @@ import { MatTabsModule, MatSliderModule, MatDatepickerModule, MatSelectModule, M
 
 import { FlightSearchEngineComponent } from './flight-search-engine/flight-search-engine.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
+        HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         MatInputModule,

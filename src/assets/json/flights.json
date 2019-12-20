@@ -1,0 +1,75 @@
+[
+    {
+        "number": "AI-202",
+        "amount": "Rs 9,500.00",
+        "depart": "Pune",
+        "departCode": "PNQ",
+        "arrive": "Delhi",
+        "arriveCode": "DEL",
+        "departDate": "1st Jan, 2012",
+        "departTime": "09:00 AM",
+        "arriveDate": "1st Jan, 2012",
+        "arriveTime": "11:00 AM",
+        "carrier": "Air India"
+    }, {
+        "number": "6E-302",
+        "amount": "Rs 8,500.00",
+        "depart": "Pune",
+        "departCode": "PNQ",
+        "arrive": "Delhi",
+        "arriveCode": "DEL",
+        "departDate": "1st Jan, 2012",
+        "departTime": "10:00 AM",
+        "arriveDate": "1st Jan, 2012",
+        "arriveTime": "12:00 PM",
+        "carrier": "Indigo"
+    }, {
+        "number": "SJ-402",
+        "amount": "Rs 7,500.00",
+        "depart": "Pune",
+        "departCode": "PNQ",
+        "arrive": "Delhi",
+        "arriveCode": "DEL",
+        "departDate": "1st Jan, 2012",
+        "departTime": "11:00 AM",
+        "arriveDate": "1st Jan, 2012",
+        "arriveTime": "01:00 PM",
+        "carrier": "SpiceJet"
+    }, {
+        "number": "AI-702",
+        "amount": "Rs 9,500.00",
+        "depart": "Delhi",
+        "departCode": "DEL",
+        "arrive": "Pune",
+        "arriveCode": "PNQ",
+        "departDate": "10th Jan, 2012",
+        "departTime": "09:00 PM",
+        "arriveDate": "10th Jan, 2012",
+        "arriveTime": "11:00 PM",
+        "carrier": "Air India"
+    }, {
+        "number": "6E-802",
+        "amount": "Rs 8,500.00",
+        "depart": "Delhi",
+        "departCode": "DEL",
+        "arrive": "Pune",
+        "arriveCode": "PNQ",
+        "departDate": "10th Jan, 2012",
+        "departTime": "10:00 PM",
+        "arriveDate": "10th Jan, 2012",
+        "arriveTime": "00:00 AM",
+        "carrier": "Indigo"
+    }, {
+        "number": "SJ-902",
+        "amount": "Rs 7,500.00",
+        "depart": "Delhi",
+        "departCode": "DEL",
+        "arrive": "Pune",
+        "arriveCode": "PNQ",
+        "departDate": "10th Jan, 2012",
+        "departTime": "11:00 PM",
+        "arriveDate": "10th Jan, 2012",
+        "arriveTime": "01:00 AM",
+        "carrier": "Air India"
+    }
+]
