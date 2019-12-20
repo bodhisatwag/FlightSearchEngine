@@ -53,22 +53,22 @@
 
         <mat-form-field>
             <input matInput [matDatepicker]="departureDate" placeholder="Departure date"
-                formControlName="destinationCity">
+                formControlName="departureDate">
             <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
             <mat-datepicker #departureDate></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="returnDate" placeholder="Return date" formControlName="destinationCity">
+            <input matInput [matDatepicker]="returnDate" placeholder="Return date" formControlName="returnDate">
             <mat-datepicker-toggle matSuffix [for]="returnDate"></mat-datepicker-toggle>
             <mat-datepicker #returnDate></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field>
             <mat-label>Passengers</mat-label>
-            <mat-select formControlName="destinationCity">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
+            <mat-select formControlName="passenger">
+                <mat-option *ngFor="let passenger of passengerList" [value]="passenger.name">
+                    {{passenger.name}}
                 </mat-option>
             </mat-select>
         </mat-form-field>

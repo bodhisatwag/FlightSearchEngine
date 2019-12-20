@@ -10,4 +10,16 @@ export interface Flight {
     arriveDate: string;
     arriveTime: string;
     carrier: string;
+};
+
+export interface Passenger {
+    name: string;
+    age: number;
+    sex: Sex;
+}
+
+export enum Sex {
+    Male = 'Male',
+    Female = 'Female',
+    UnDisclosed = 'UnDisclosed'
 }

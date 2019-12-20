@@ -1,0 +1,19 @@
+[
+    {
+        "name": "Bodhisatwa Ghosh",
+        "age": 30,
+        "sex": "Male"
+    }, {
+        "name": "Anindita Mitra",
+        "age": 30,
+        "sex": "Female"
+    }, {
+        "name": "Debajyoti Ash",
+        "age": 30,
+        "sex": "Male"
+    }, {
+        "name": "Poulomi Ash",
+        "age": 30,
+        "sex": "Female"
+    }
+]

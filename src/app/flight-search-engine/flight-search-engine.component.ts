@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
 import { FlightSearchEngineService } from './flight-search-engine.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Flight } from './flight-search-engine.entities';
+import { Flight, Passenger } from './flight-search-engine.entities';
 
 @Component({
     selector: 'app-flight-search-engine',
@@ -17,6 +17,7 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
     public flightSearchForm: FormGroup;
     public flightList: Flight[] = [];
+    public passengerList: Passenger[] = [];
 
     constructor(
         private flightSearchEngineService: FlightSearchEngineService,
@@ -27,14 +28,18 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
         this._subs.push(this.flightSearchEngineService.getFlights().subscribe((response: Flight[]) => {
             this.flightList = response;
-        }))
+        }));
+
+        this._subs.push(this.flightSearchEngineService.getPassengers().subscribe((response: Passenger[]) => {
+            this.passengerList = response;
+        }));
 
         this.flightSearchForm = this.fb.group({
-            originCity: [''],
-            destinationCity: [''],
-            departureDate: [''],
-            returnDate: [''],
-            passengers: ['']
+            originCity: new FormControl('', [Validators.required]),
+            destinationCity: new FormControl('', [Validators.required]),
+            departureDate: new FormControl('', [Validators.required]),
+            returnDate: new FormControl('', [Validators.required]),
+            passenger: new FormControl('', [Validators.required])
         });
     }
 
@@ -46,5 +51,4 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
             this._subs = [];
         }
     }
-
 }
