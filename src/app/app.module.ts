@@ -10,6 +10,7 @@ import { MatTabsModule, MatSliderModule, MatDatepickerModule, MatSelectModule, M
 import { FlightSearchEngineComponent } from './flight-search-engine/flight-search-engine.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import "hammerjs";
 
 @NgModule({
     declarations: [

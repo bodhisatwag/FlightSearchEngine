@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, OnDestro
 import { FlightSearchEngineService } from './flight-search-engine.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Flight, Passenger } from './flight-search-engine.entities';
+import { Flight, Passenger, SearchCriteria } from './flight-search-engine.entities';
 
 @Component({
     selector: 'app-flight-search-engine',
@@ -14,10 +14,13 @@ import { Flight, Passenger } from './flight-search-engine.entities';
 export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
     private _subs: Subscription[] = [];
+    private searchCriteriaModel: SearchCriteria;
 
     public flightSearchForm: FormGroup;
     public flightList: Flight[] = [];
     public passengerList: Passenger[] = [];
+    public tabSelected = 5000;
+    public priceRange: number;
 
     constructor(
         private flightSearchEngineService: FlightSearchEngineService,
@@ -34,7 +37,15 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
             this.passengerList = response;
         }));
 
-        this.flightSearchForm = this.flightSearchEngineService.generateFlightSearchForm();
+        this.searchCriteriaModel = {
+            originCity: null,
+            destinationCity: null,
+            departureDate: null,
+            returnDate: null,
+            passenger: null,
+        };
+
+        this.flightSearchForm = this.flightSearchEngineService.generateFlightSearchForm(this.searchCriteriaModel);
 
         this.changeDetectionRef.detectChanges();
     }
@@ -46,5 +57,13 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
             })
             this._subs = [];
         }
+    }
+
+    formatLabel(value: number) {
+        if (value >= 1000) {
+            return Math.round(value / 1000) + 'k';
+        }
+
+        return value;
     }
 }

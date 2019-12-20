@@ -2,7 +2,7 @@
     <div class="fse-header">Flight Search Engine</div>
     <div class="fse-body">
         <div class="fse-criteria">
-            <mat-tab-group>
+            <mat-tab-group [selectedIndex]="tabSelected" (selectedIndexChange)="tabSelected = $event">
                 <mat-tab label="One way">
                     <ng-container *ngTemplateOutlet="searchTpl"></ng-container>
                 </mat-tab>
@@ -11,7 +11,12 @@
                 </mat-tab>
             </mat-tab-group>
 
-            <mat-slider min="1000" max="10000" step="1" value="2000"></mat-slider>
+            <div class="refine-flight-search">
+                <div class="refine-title">Refine Flight Search</div>
+
+                <mat-slider min="1000" max="10000" tickInterval="1000" [(ngModel)]="priceRange" [thumbLabel]="true" [displayWith]="formatLabel"></mat-slider>
+            </div>
+
         </div>
         <div class="fse-results">
             <div class="flight-results-header">
@@ -19,13 +24,15 @@
                     Pune > Delhi > Pune
                 </div>
                 <div class="flight-results-header-schedule">
-                    <div class="depart" *ngIf="flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('departureDate').value">
+                    <div class="depart"
+                        *ngIf="flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('departureDate').value">
                         <span class="label">Depart: </span>
                         <span class="value">{{flightSearchForm.get('departureDate').value | date: 'dd-MMM-y'}}</span>
                     </div>
-                    <div class="return" *ngIf="flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('returnDate').value">
+                    <div class="return"
+                    *ngIf="tabSelected !== 0 && flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('returnDate').value">
                         <span class="label">Return: </span>
-                        <span class="value">{{flightSearchForm.get('returnDate').value}}</span>
+                        <span class="value">{{flightSearchForm.get('returnDate').value | date: 'dd-MMM-y'}}</span>
                     </div>
                 </div>
             </div>
@@ -60,7 +67,7 @@
             <mat-datepicker #departureDate></mat-datepicker>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field *ngIf="tabSelected !== 0">
             <input matInput [matDatepicker]="returnDate" placeholder="Return date" formControlName="returnDate">
             <mat-datepicker-toggle matSuffix [for]="returnDate"></mat-datepicker-toggle>
             <mat-datepicker #returnDate></mat-datepicker>

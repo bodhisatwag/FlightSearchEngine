@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Flight, Passenger } from './flight-search-engine.entities';
+import { Flight, Passenger, SearchCriteria } from './flight-search-engine.entities';
 import { Observable } from 'rxjs';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -27,13 +27,13 @@ export class FlightSearchEngineService {
         }));
     }
 
-    generateFlightSearchForm(): FormGroup {
+    generateFlightSearchForm(searchCriteriaModel: SearchCriteria): FormGroup {
         let flightSearchForm: FormGroup = this.fb.group({
-            originCity: new FormControl(null, [Validators.required]),
-            destinationCity: new FormControl(null, [Validators.required]),
-            departureDate: new FormControl(null, [Validators.required]),
-            returnDate: new FormControl(null, [Validators.required]),
-            passenger: new FormControl(null, [Validators.required])
+            originCity: new FormControl(searchCriteriaModel.originCity || null, [Validators.required]),
+            destinationCity: new FormControl(searchCriteriaModel.destinationCity || null, [Validators.required]),
+            departureDate: new FormControl(searchCriteriaModel.departureDate || null, [Validators.required]),
+            returnDate: new FormControl(searchCriteriaModel.returnDate || null, [Validators.required]),
+            passenger: new FormControl(searchCriteriaModel.passenger || null, [Validators.required]),
         });
 
         return flightSearchForm;

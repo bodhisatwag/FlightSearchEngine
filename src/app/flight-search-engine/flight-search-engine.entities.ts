@@ -14,6 +14,14 @@ export interface Flight {
     carrier: string;
 };
 
+export interface SearchCriteria {
+    originCity: string;
+    destinationCity: string;
+    departureDate: string;
+    returnDate?: string;
+    passenger: string;
+}
+
 export interface Passenger {
     name: string;
     age: number;
