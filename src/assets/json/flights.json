@@ -6,9 +6,11 @@
         "departCode": "PNQ",
         "arrive": "Delhi",
         "arriveCode": "DEL",
-        "departDate": "1st Jan, 2012",
+        "departDateTime": 1577849400000,
+        "departDate": "1st Jan, 2020",
         "departTime": "09:00 AM",
-        "arriveDate": "1st Jan, 2012",
+        "arriveDateTime": 1577856600000,
+        "arriveDate": "1st Jan, 2020",
         "arriveTime": "11:00 AM",
         "carrier": "Air India"
     }, {
@@ -18,9 +20,11 @@
         "departCode": "PNQ",
         "arrive": "Delhi",
         "arriveCode": "DEL",
-        "departDate": "1st Jan, 2012",
+        "departDateTime": 1577853000000,
+        "departDate": "1st Jan, 2020",
         "departTime": "10:00 AM",
-        "arriveDate": "1st Jan, 2012",
+        "arriveDateTime": 1577860200000,
+        "arriveDate": "1st Jan, 2020",
         "arriveTime": "12:00 PM",
         "carrier": "Indigo"
     }, {
@@ -30,9 +34,11 @@
         "departCode": "PNQ",
         "arrive": "Delhi",
         "arriveCode": "DEL",
-        "departDate": "1st Jan, 2012",
+        "departDateTime": 1577856600000,
+        "departDate": "1st Jan, 2020",
         "departTime": "11:00 AM",
-        "arriveDate": "1st Jan, 2012",
+        "arriveDateTime": 1577863800000,
+        "arriveDate": "1st Jan, 2020",
         "arriveTime": "01:00 PM",
         "carrier": "SpiceJet"
     }, {
@@ -42,9 +48,11 @@
         "departCode": "DEL",
         "arrive": "Pune",
         "arriveCode": "PNQ",
-        "departDate": "10th Jan, 2012",
+        "departDateTime": 1578670200000,
+        "departDate": "10th Jan, 2020",
         "departTime": "09:00 PM",
-        "arriveDate": "10th Jan, 2012",
+        "arriveDateTime": 1578677400000,
+        "arriveDate": "10th Jan, 2020",
         "arriveTime": "11:00 PM",
         "carrier": "Air India"
     }, {
@@ -54,9 +62,11 @@
         "departCode": "DEL",
         "arrive": "Pune",
         "arriveCode": "PNQ",
-        "departDate": "10th Jan, 2012",
+        "departDateTime": 1578673800000,
+        "departDate": "10th Jan, 2020",
         "departTime": "10:00 PM",
-        "arriveDate": "10th Jan, 2012",
+        "arriveDateTime": 1578681000000,
+        "arriveDate": "10th Jan, 2020",
         "arriveTime": "00:00 AM",
         "carrier": "Indigo"
     }, {
@@ -66,9 +76,11 @@
         "departCode": "DEL",
         "arrive": "Pune",
         "arriveCode": "PNQ",
-        "departDate": "10th Jan, 2012",
+        "departDateTime": 1578677400000,
+        "departDate": "10th Jan, 2020",
         "departTime": "11:00 PM",
-        "arriveDate": "10th Jan, 2012",
+        "arriveDateTime": 1578684600000,
+        "arriveDate": "11th Jan, 2020",
         "arriveTime": "01:00 AM",
         "carrier": "Air India"
     }

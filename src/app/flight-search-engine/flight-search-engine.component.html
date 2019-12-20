@@ -19,13 +19,13 @@
                     Pune > Delhi > Pune
                 </div>
                 <div class="flight-results-header-schedule">
-                    <div class="depart">
+                    <div class="depart" *ngIf="flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('departureDate').value">
                         <span class="label">Depart: </span>
-                        <span class="value">1st Jan 2012</span>
+                        <span class="value">{{flightSearchForm.get('departureDate').value | date: 'dd-MMM-y'}}</span>
                     </div>
-                    <div class="return">
+                    <div class="return" *ngIf="flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('returnDate').value">
                         <span class="label">Return: </span>
-                        <span class="value">10th Jan 2012</span>
+                        <span class="value">{{flightSearchForm.get('returnDate').value}}</span>
                     </div>
                 </div>
             </div>
@@ -96,15 +96,15 @@
             {{flight.number}}
         </div>
         <div class="flight-direction">
-            {{flight.depart}} - {{flight.arrive}}
+            {{flight.depart}} > {{flight.arrive}}
         </div>
         <div class="flight-timing">
             <span class="timing-label">Depart: </span>
-            <span class="timing-value">{{flight.departTime}}</span>
+            <span class="timing-value">{{flight.departDateTime | date: 'h:mm a'}}</span>
         </div>
         <div class="flight-timing">
             <span class="timing-label">Arrive: </span>
-            <span class="timing-value">{{flight.arriveTime}}</span>
+            <span class="timing-value">{{flight.arriveDateTime | date: 'h:mm a'}}</span>
         </div>
     </div>
 </ng-template>

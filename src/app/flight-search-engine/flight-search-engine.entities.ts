@@ -5,8 +5,10 @@ export interface Flight {
     departCode: string;
     arrive: string;
     arriveCode: string;
+    departDateTime: number;
     departDate: string;
     departTime: string;
+    arriveDateTime: number;
     arriveDate: string;
     arriveTime: string;
     carrier: string;
