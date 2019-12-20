@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FlightSearchEngineService } from './flight-search-engine.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -21,7 +21,7 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
     constructor(
         private flightSearchEngineService: FlightSearchEngineService,
-        private fb: FormBuilder
+        private changeDetectionRef: ChangeDetectorRef
     ) { }
 
     ngOnInit() {
@@ -34,13 +34,9 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
             this.passengerList = response;
         }));
 
-        this.flightSearchForm = this.fb.group({
-            originCity: new FormControl('', [Validators.required]),
-            destinationCity: new FormControl('', [Validators.required]),
-            departureDate: new FormControl('', [Validators.required]),
-            returnDate: new FormControl('', [Validators.required]),
-            passenger: new FormControl('', [Validators.required])
-        });
+        this.flightSearchForm = this.flightSearchEngineService.generateFlightSearchForm();
+
+        this.changeDetectionRef.detectChanges();
     }
 
     ngOnDestroy() {

@@ -14,11 +14,11 @@
             <mat-slider min="1000" max="10000" step="1" value="2000"></mat-slider>
         </div>
         <div class="fse-results">
-            <div class="fse-results-header">
-                <div class="fse-results-header-title">
+            <div class="flight-results-header">
+                <div class="flight-results-header-title">
                     Pune > Delhi > Pune
                 </div>
-                <div class="fse-results-header-schedule">
+                <div class="flight-results-header-schedule">
                     <div class="depart">
                         <span class="label">Depart: </span>
                         <span class="value">1st Jan 2012</span>
@@ -29,12 +29,14 @@
                     </div>
                 </div>
             </div>
-            <div class="fse-results-body">
-                <div class="fse-details">
-                    <ng-container *ngTemplateOutlet="flightsTpl"></ng-container>
-                </div>
-                <div class="fse-booking">
-                    <button mat-raised-button color="primary">Book this Flight</button>
+            <div class="flight-results-body">
+                <div class="flight" *ngFor="let flight of flightList">
+                    <div class="flight-details">
+                        <ng-container *ngTemplateOutlet="flightsTpl; context: { data: flight }"></ng-container>
+                    </div>
+                    <div class="flight-booking">
+                        <button mat-raised-button color="primary">Book this Flight</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,31 +79,32 @@
     </div>
 </ng-template>
 
-<ng-template #flightsTpl>
+<ng-template #flightsTpl let-flight="data">
     <div class="flight-amount">
-        Rs 9,500.00
+        {{flight.amount}}
+        <!-- Rs 9,500.00 -->
     </div>
     <div class="flight-directions">
-        <ng-container *ngTemplateOutlet="flightDetails"></ng-container>
-        <ng-container *ngTemplateOutlet="flightDetails"></ng-container>
+        <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
+        <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
     </div>
 </ng-template>
 
-<ng-template #flightDetails>
+<ng-template #flightDetails let-flight="data">
     <div class="flight-oneway">
         <div class="flight-number">
-            AI-202
+            {{flight.number}}
         </div>
         <div class="flight-direction">
-            PQN > DEL
+            {{flight.depart}} - {{flight.arrive}}
         </div>
         <div class="flight-timing">
             <span class="timing-label">Depart: </span>
-            <span class="timing-value">10:00 AM</span>
+            <span class="timing-value">{{flight.departTime}}</span>
         </div>
         <div class="flight-timing">
             <span class="timing-label">Arrive: </span>
-            <span class="timing-value">12:00 PM</span>
+            <span class="timing-value">{{flight.arriveTime}}</span>
         </div>
     </div>
 </ng-template>
