@@ -37,7 +37,7 @@
                 </div>
             </div>
             <div class="flight-results-body">
-                <div class="flight" *ngFor="let flight of flightList">
+                <div class="flight" *ngFor="let flight of flightListLocal">
                     <div class="flight-details">
                         <ng-container *ngTemplateOutlet="flightsTpl; context: { data: flight }"></ng-container>
                     </div>

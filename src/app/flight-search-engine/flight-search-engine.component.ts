@@ -18,6 +18,7 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
     public flightSearchForm: FormGroup;
     public flightList: Flight[] = [];
+    public flightListLocal: Flight[] = [];
     public passengerList: Passenger[] = [];
     public tabSelected = 5000;
     public priceRange: number;
@@ -31,6 +32,7 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
         this._subs.push(this.flightSearchEngineService.getFlights().subscribe((response: Flight[]) => {
             this.flightList = response;
+            this.flightListLocal = this.flightList;
         }));
 
         this._subs.push(this.flightSearchEngineService.getPassengers().subscribe((response: Passenger[]) => {
@@ -46,6 +48,15 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
         };
 
         this.flightSearchForm = this.flightSearchEngineService.generateFlightSearchForm(this.searchCriteriaModel);
+
+        this.flightSearchForm.get('originCity').valueChanges.subscribe((item) => {
+            var flightListLocal = [];
+            flightListLocal = this.flightList.filter((flight: Flight) => {
+                return flight.depart === item;
+            });
+            this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
+            this.changeDetectionRef.detectChanges();
+        })
 
         this.changeDetectionRef.detectChanges();
     }
@@ -66,4 +77,12 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
         return value;
     }
+
+    // searchUpdated(event: any) {
+    //     console.log(event);
+    //     this.flightList = this.flightList.filter((flight: any) => {
+    //         return flight.originCity === event.target.value;
+    //     });
+    //     this.changeDetectionRef.detectChanges();
+    // }
 }

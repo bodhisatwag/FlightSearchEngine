@@ -1,6 +1,3 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
-
-
 .flight-search-engine {
     padding: 20px;
 
@@ -13,9 +10,6 @@
         padding: 20px;
         display: flex;
         background-color: #ebebeb;
-        @media only screen and (max-width: 991px) {
-            display: block;
-        }
 
         .fse-criteria {
             width: 30%;
@@ -24,17 +18,12 @@
             -webkit-box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.50);
             -moz-box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.50);
             box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.50);
-            @media only screen and (max-width: 991px) {
-                width: auto;
-                margin-bottom: 20px;
-            }
             .mat-raised-button{
                 background-color: #0071cd;
                 padding-top: 10px;
                 padding-bottom: 10px;
                 text-transform: uppercase;
                 font-size: 18px;
-                color: #FFF;
             }
             .searh-panel {
                 display: flex;
@@ -46,7 +35,6 @@
                 margin-top: 20px;
                 .refine-title{
                     font-size: 20px;
-                    margin-bottom: 20px;
                 }
                 .mat-slider-horizontal{
                     min-width: 100%;
@@ -58,11 +46,7 @@
             width: 70%;
             padding: 0 0 0 20px;
             background-color: #ebebeb;
-            @media only screen and (max-width: 991px) {
-                width: auto;
-                display: block;
-                padding: 0;
-            }
+
 
             .flight-results-header {
                 padding: 10px;
@@ -91,8 +75,6 @@
                     -webkit-box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.50);
                     -moz-box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.50);
                     box-shadow: 0px 3px 6px -2px rgba(0,0,0,0.50);
-                    padding-bottom: 10px;
-
                     .mat-raised-button{
                         background-color: #0071cd;
                     }
@@ -101,17 +83,9 @@
                         border-top: 2px solid #f5f4f7;
                     }
 
-                    @media only screen and (max-width: 480px) {
-                        flex-direction: column;
-                    }
-
                     .flight-details {
                         width: 70%;
                         padding: 20px;
-
-                        @media only screen and (max-width: 480px) {
-                            width: auto;
-                        }
 
                         .flight-amount {
                             font-size: 20px;
@@ -146,11 +120,6 @@
                         justify-content: center;
                         align-items: center;
                         display: flex;
-                        padding-right: 20px;
-
-                        @media only screen and (max-width: 480px) {
-                            width: auto;
-                        }
                     }
                 }
             }
