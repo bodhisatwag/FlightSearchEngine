@@ -20,7 +20,7 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
     public flightList: Flight[] = [];
     public flightListLocal: Flight[] = [];
     public passengerList: Passenger[] = [];
-    public tabSelected = 5000;
+    public tabSelected = 0;
     public priceRange: number;
 
     constructor(
@@ -40,23 +40,34 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
         }));
 
         this.searchCriteriaModel = {
-            originCity: null,
-            destinationCity: null,
-            departureDate: null,
+            depart: null,
+            arrive: null,
+            departDate: null,
             returnDate: null,
             passenger: null,
         };
 
         this.flightSearchForm = this.flightSearchEngineService.generateFlightSearchForm(this.searchCriteriaModel);
 
-        this.flightSearchForm.get('originCity').valueChanges.subscribe((item) => {
-            var flightListLocal = [];
-            flightListLocal = this.flightList.filter((flight: Flight) => {
-                return flight.depart === item;
-            });
-            this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
+        this.flightSearchForm.valueChanges.subscribe((item: any) => {
+            console.log(item);
+            // var flightListLocal = [];
+            // flightListLocal = this.flightList.filter((flight: Flight) => {
+            //     return flight.depart === item.originCity;
+            // });
+            // this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
             this.changeDetectionRef.detectChanges();
-        })
+
+        });
+
+        // this.flightSearchForm.get('originCity').valueChanges.subscribe((item) => {
+        //     var flightListLocal = [];
+        //     flightListLocal = this.flightList.filter((flight: Flight) => {
+        //         return flight.depart === item;
+        //     });
+        //     this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
+        //     this.changeDetectionRef.detectChanges();
+        // });
 
         this.changeDetectionRef.detectChanges();
     }
@@ -77,12 +88,4 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
 
         return value;
     }
-
-    // searchUpdated(event: any) {
-    //     console.log(event);
-    //     this.flightList = this.flightList.filter((flight: any) => {
-    //         return flight.originCity === event.target.value;
-    //     });
-    //     this.changeDetectionRef.detectChanges();
-    // }
 }

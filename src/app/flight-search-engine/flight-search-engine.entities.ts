@@ -15,9 +15,9 @@ export interface Flight {
 };
 
 export interface SearchCriteria {
-    originCity: string;
-    destinationCity: string;
-    departureDate: string;
+    depart: string;
+    arrive: string;
+    departDate: string;
     returnDate?: string;
     passenger: string;
 }

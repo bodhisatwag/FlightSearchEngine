@@ -53,18 +53,18 @@
 <ng-template #searchTpl>
     <div class="searh-panel" [formGroup]="flightSearchForm">
         <mat-form-field>
-            <input matInput placeholder="Enter Origin City" formControlName="originCity">
+            <input matInput placeholder="Enter Origin City" formControlName="depart">
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Enter Destination City" formControlName="destinationCity">
+            <input matInput placeholder="Enter Destination City" formControlName="arrive">
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="departureDate" placeholder="Departure date"
-                formControlName="departureDate">
-            <mat-datepicker-toggle matSuffix [for]="departureDate"></mat-datepicker-toggle>
-            <mat-datepicker #departureDate></mat-datepicker>
+            <input matInput [matDatepicker]="departDate" placeholder="Departure date"
+                formControlName="departDate">
+            <mat-datepicker-toggle matSuffix [for]="departDate"></mat-datepicker-toggle>
+            <mat-datepicker #departDate></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field *ngIf="tabSelected !== 0">
@@ -92,9 +92,14 @@
         <!-- Rs 9,500.00 -->
     </div>
     <div class="flight-directions">
-        <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
-        <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
+        <div class="flight-to">
+            <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
+        </div>
+        <div class="flight-from" *ngIf="tabSelected !== 0 && flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('returnDate').value">
+            <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
+        </div>
     </div>
+
 </ng-template>
 
 <ng-template #flightDetails let-flight="data">

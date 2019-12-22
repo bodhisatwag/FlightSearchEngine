@@ -29,13 +29,25 @@ export class FlightSearchEngineService {
 
     generateFlightSearchForm(searchCriteriaModel: SearchCriteria): FormGroup {
         let flightSearchForm: FormGroup = this.fb.group({
-            originCity: new FormControl(searchCriteriaModel.originCity || null, [Validators.required]),
-            destinationCity: new FormControl(searchCriteriaModel.destinationCity || null, [Validators.required]),
-            departureDate: new FormControl(searchCriteriaModel.departureDate || null, [Validators.required]),
+            depart: new FormControl(searchCriteriaModel.depart || null, [Validators.required]),
+            arrive: new FormControl(searchCriteriaModel.arrive || null, [Validators.required]),
+            departDate: new FormControl(searchCriteriaModel.departDate || null, [Validators.required]),
             returnDate: new FormControl(searchCriteriaModel.returnDate || null, [Validators.required]),
             passenger: new FormControl(searchCriteriaModel.passenger || null, [Validators.required]),
         });
 
         return flightSearchForm;
+    }
+
+    multiFilter(arr: Object[], filters: Object): any[] {
+        const filterKeys = Object.keys(filters);
+        return arr.filter(eachObj => {
+            return filterKeys.every(eachKey => {
+                if (!filters[eachKey].length) {
+                    return true; // passing an empty filter means that filter is ignored.
+                }
+                return filters[eachKey].includes(eachObj[eachKey]);
+            });
+        });
     }
 }
