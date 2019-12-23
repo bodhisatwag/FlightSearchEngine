@@ -21,7 +21,8 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
     public flightListLocal: Flight[] = [];
     public passengerList: Passenger[] = [];
     public tabSelected = 0;
-    public priceRange: number;
+
+    public priceRange: 10000;
 
     constructor(
         private flightSearchEngineService: FlightSearchEngineService,
@@ -48,27 +49,6 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
         };
 
         this.flightSearchForm = this.flightSearchEngineService.generateFlightSearchForm(this.searchCriteriaModel);
-
-        this.flightSearchForm.valueChanges.subscribe((item: any) => {
-            console.log(item);
-            // var flightListLocal = [];
-            // flightListLocal = this.flightList.filter((flight: Flight) => {
-            //     return flight.depart === item.originCity;
-            // });
-            // this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
-            this.changeDetectionRef.detectChanges();
-
-        });
-
-        // this.flightSearchForm.get('originCity').valueChanges.subscribe((item) => {
-        //     var flightListLocal = [];
-        //     flightListLocal = this.flightList.filter((flight: Flight) => {
-        //         return flight.depart === item;
-        //     });
-        //     this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
-        //     this.changeDetectionRef.detectChanges();
-        // });
-
         this.changeDetectionRef.detectChanges();
     }
 
@@ -87,5 +67,67 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
         }
 
         return value;
+    }
+
+    onTabChange(event: any): void {
+        this.tabSelected = event;
+        this.flightSearchForm.reset();
+        if (this.tabSelected === 0) {
+            this.flightSearchForm.get('returnDate').clearValidators();
+        } else if (this.tabSelected === 0) {
+            this.flightSearchForm.get('returnDate').setValidators([Validators.required]);
+        }
+        this.flightListLocal = this.flightList;
+    }
+
+    onSearchClicked(): void {
+        console.log(this.flightSearchForm.value);
+        if (this.flightSearchForm.valid) {
+            const searchCriteria = this.flightSearchForm.value;
+            let flightListLocal = [];
+            flightListLocal = this.flightList.filter((flight: Flight) => {
+                console.log('flight.departDateTime: ', new Date(flight.oneWay.departDateTime).getTime());
+                console.log('searchCriteria.departDate: ', new Date(searchCriteria.departDate).getTime());
+                console.log(new Date(flight.oneWay.departDate).getTime() === new Date(searchCriteria.departDate).getTime());
+
+                const flightDepartDate = new Date(flight.oneWay.departDateTime);
+                flightDepartDate.setHours(0, 0, 0, 0);
+
+                const flightReturnDate = this.tabSelected === 1 ? new Date(flight.return.departDateTime) : null;
+
+                if (this.tabSelected === 0) {
+                    return flight.oneWay.depart === searchCriteria.depart &&
+                        flight.oneWay.arrive === searchCriteria.arrive &&
+                        flightDepartDate.getTime() === new Date(searchCriteria.departDate).getTime();
+                } else if (this.tabSelected === 1) {
+                    return flight.oneWay.depart === searchCriteria.depart &&
+                        flight.return.depart === searchCriteria.arrive &&
+                        flight.oneWay.arrive === searchCriteria.arrive &&
+                        flight.return.arrive === searchCriteria.depart &&
+                        flightDepartDate.getTime() === new Date(searchCriteria.departDate).getTime() &&
+                        flightReturnDate.getTime() === new Date(searchCriteria.returnDate).getTime();
+                }
+
+            });
+            this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
+        } else {
+            (<any>Object).values(this.flightSearchForm.controls).forEach((ctrl: FormControl) => {
+                ctrl.markAsTouched();
+            });
+        }
+        this.changeDetectionRef.detectChanges();
+    }
+
+    onChangeSlider(): void {
+        let flightListLocal = [];
+        flightListLocal = this.flightList.filter((flight: Flight) => {
+            if (this.tabSelected === 0) {
+                return +flight.oneWay.amount <= this.priceRange;
+            } else if (this.tabSelected === 1) {
+                return +flight.return.amount <= this.priceRange;;
+            }
+        });
+        this.flightListLocal = JSON.parse(JSON.stringify(flightListLocal));
+        this.changeDetectionRef.detectChanges();
     }
 }

@@ -2,7 +2,7 @@
     <div class="fse-header">Flight Search Engine</div>
     <div class="fse-body">
         <div class="fse-criteria">
-            <mat-tab-group [selectedIndex]="tabSelected" (selectedIndexChange)="tabSelected = $event">
+            <mat-tab-group [selectedIndex]="tabSelected" (selectedIndexChange)="onTabChange($event)">
                 <mat-tab label="One way">
                     <ng-container *ngTemplateOutlet="searchTpl"></ng-container>
                 </mat-tab>
@@ -14,7 +14,8 @@
             <div class="refine-flight-search">
                 <div class="refine-title">Refine Flight Search</div>
 
-                <mat-slider min="1000" max="10000" tickInterval="1000" [(ngModel)]="priceRange" [thumbLabel]="true" [displayWith]="formatLabel"></mat-slider>
+                <mat-slider min="1000" max="30000" tickInterval="1000" [(ngModel)]="priceRange" [thumbLabel]="true"
+                    [displayWith]="formatLabel" (change)="onChangeSlider()"></mat-slider>
             </div>
 
         </div>
@@ -25,12 +26,12 @@
                 </div>
                 <div class="flight-results-header-schedule">
                     <div class="depart"
-                        *ngIf="flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('departureDate').value">
+                        *ngIf="flightSearchForm && flightSearchForm.get('departDate') && flightSearchForm.get('departDate').value">
                         <span class="label">Depart: </span>
-                        <span class="value">{{flightSearchForm.get('departureDate').value | date: 'dd-MMM-y'}}</span>
+                        <span class="value">{{flightSearchForm.get('departDate').value | date: 'dd-MMM-y'}}</span>
                     </div>
                     <div class="return"
-                    *ngIf="tabSelected !== 0 && flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('returnDate').value">
+                        *ngIf="tabSelected !== 0 && flightSearchForm && flightSearchForm.get('returnDate') && flightSearchForm.get('returnDate').value">
                         <span class="label">Return: </span>
                         <span class="value">{{flightSearchForm.get('returnDate').value | date: 'dd-MMM-y'}}</span>
                     </div>
@@ -54,23 +55,40 @@
     <div class="searh-panel" [formGroup]="flightSearchForm">
         <mat-form-field>
             <input matInput placeholder="Enter Origin City" formControlName="depart">
+            <mat-error *ngIf="flightSearchForm.get('depart').hasError('required')">
+                Origin City <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field>
             <input matInput placeholder="Enter Destination City" formControlName="arrive">
+            <mat-error *ngIf="flightSearchForm.get('arrive').hasError('required')">
+                Destination City <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [matDatepicker]="departDate" placeholder="Departure date"
-                formControlName="departDate">
+            <input matInput [matDatepicker]="departDate" placeholder="Departure date" formControlName="departDate">
             <mat-datepicker-toggle matSuffix [for]="departDate"></mat-datepicker-toggle>
             <mat-datepicker #departDate></mat-datepicker>
+            <mat-error *ngIf="flightSearchForm.get('departDate').hasError('required') && !flightSearchForm.get('departDate').hasError('matDatepickerParse')">
+                Departure date <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="flightSearchForm.get('departDate').hasError('matDatepickerParse')">
+                Departure date <strong>invalid</strong>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field *ngIf="tabSelected !== 0">
             <input matInput [matDatepicker]="returnDate" placeholder="Return date" formControlName="returnDate">
             <mat-datepicker-toggle matSuffix [for]="returnDate"></mat-datepicker-toggle>
             <mat-datepicker #returnDate></mat-datepicker>
+            <mat-error *ngIf="flightSearchForm.get('returnDate').hasError('required') && !flightSearchForm.get('returnDate').hasError('matDatepickerParse')">
+                Return date <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="flightSearchForm.get('returnDate').hasError('matDatepickerParse')">
+                Return date <strong>invalid</strong>
+            </mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -80,26 +98,28 @@
                     {{passenger.name}}
                 </mat-option>
             </mat-select>
+            <mat-error *ngIf="flightSearchForm.get('passenger').hasError('required')">
+                Passengers <strong>required</strong>
+            </mat-error>
         </mat-form-field>
 
-        <button mat-raised-button color="accent">Search</button>
+        <button mat-raised-button color="accent" (click)="onSearchClicked()">Search</button>
     </div>
 </ng-template>
 
 <ng-template #flightsTpl let-flight="data">
     <div class="flight-amount">
-        {{flight.amount}}
-        <!-- Rs 9,500.00 -->
+        {{(tabSelected === 0 ? flight.oneWay && flight.oneWay.amount : flight.return && flight.return.amount) | INRCurrencyPipe }}
     </div>
     <div class="flight-directions">
         <div class="flight-to">
-            <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
+            <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight.oneWay }"></ng-container>
         </div>
-        <div class="flight-from" *ngIf="tabSelected !== 0 && flightSearchForm && flightSearchForm.get('departureDate') && flightSearchForm.get('returnDate').value">
-            <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight }"></ng-container>
+        <div class="flight-from"
+            *ngIf="tabSelected == 1 && flightSearchForm && flightSearchForm.get('returnDate') && flightSearchForm.get('returnDate').value && flight.return">
+            <ng-container *ngTemplateOutlet="flightDetails; context: { data: flight.return }"></ng-container>
         </div>
     </div>
-
 </ng-template>
 
 <ng-template #flightDetails let-flight="data">

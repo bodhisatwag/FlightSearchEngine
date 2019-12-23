@@ -1,4 +1,10 @@
 export interface Flight {
+    oneWay: FlightDetails;
+    return: FlightDetails;
+    carrier: string;
+};
+
+export interface FlightDetails {
     number: string;
     amount: string;
     depart: string;
@@ -11,8 +17,7 @@ export interface Flight {
     arriveDateTime: number;
     arriveDate: string;
     arriveTime: string;
-    carrier: string;
-};
+}
 
 export interface SearchCriteria {
     depart: string;

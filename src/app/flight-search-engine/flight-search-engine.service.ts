@@ -32,22 +32,22 @@ export class FlightSearchEngineService {
             depart: new FormControl(searchCriteriaModel.depart || null, [Validators.required]),
             arrive: new FormControl(searchCriteriaModel.arrive || null, [Validators.required]),
             departDate: new FormControl(searchCriteriaModel.departDate || null, [Validators.required]),
-            returnDate: new FormControl(searchCriteriaModel.returnDate || null, [Validators.required]),
+            returnDate: new FormControl(searchCriteriaModel.returnDate || null),
             passenger: new FormControl(searchCriteriaModel.passenger || null, [Validators.required]),
         });
 
         return flightSearchForm;
     }
 
-    multiFilter(arr: Object[], filters: Object): any[] {
-        const filterKeys = Object.keys(filters);
-        return arr.filter(eachObj => {
-            return filterKeys.every(eachKey => {
-                if (!filters[eachKey].length) {
-                    return true; // passing an empty filter means that filter is ignored.
-                }
-                return filters[eachKey].includes(eachObj[eachKey]);
-            });
-        });
-    }
+    // multiFilter(arr: Object[], filters: Object): any[] {
+    //     const filterKeys = Object.keys(filters);
+    //     return arr.filter(eachObj => {
+    //         return filterKeys.every(eachKey => {
+    //             if (!filters[eachKey].length) {
+    //                 return true; // passing an empty filter means that filter is ignored.
+    //             }
+    //             return filters[eachKey].includes(eachObj[eachKey]);
+    //         });
+    //     });
+    // }
 }
