@@ -11,7 +11,6 @@ import { FlightSearchEngineComponent } from './flight-search-engine/flight-searc
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import "hammerjs";
-import { INRCurrencyPipe } from './flight-search-engine/indian-rupee.pipe';
 
 @NgModule({
     declarations: [
