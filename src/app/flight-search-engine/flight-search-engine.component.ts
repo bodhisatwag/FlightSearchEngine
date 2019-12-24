@@ -94,6 +94,7 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
                 flightDepartDate.setHours(0, 0, 0, 0);
 
                 const flightReturnDate = this.tabSelected === 1 ? new Date(flight.return.departDateTime) : null;
+                flightReturnDate.setHours(0, 0, 0, 0);
 
                 if (this.tabSelected === 0) {
                     return flight.oneWay.depart === searchCriteria.depart &&

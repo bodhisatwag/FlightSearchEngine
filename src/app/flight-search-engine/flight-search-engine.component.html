@@ -109,7 +109,7 @@
 
 <ng-template #flightsTpl let-flight="data">
     <div class="flight-amount">
-        {{(tabSelected === 0 ? flight.oneWay && flight.oneWay.amount : flight.return && flight.return.amount) | INRCurrencyPipe }}
+        {{(tabSelected === 0 ? flight.oneWay && flight.oneWay.amount : flight.return && flight.return.amount) | currency:'INR' }}
     </div>
     <div class="flight-directions">
         <div class="flight-to">

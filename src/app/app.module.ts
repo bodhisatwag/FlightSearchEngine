@@ -16,7 +16,6 @@ import { INRCurrencyPipe } from './flight-search-engine/indian-rupee.pipe';
 @NgModule({
     declarations: [
         AppComponent,
-        INRCurrencyPipe,
         FlightSearchEngineComponent
     ],
     imports: [
