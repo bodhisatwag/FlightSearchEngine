@@ -86,9 +86,6 @@ export class FlightSearchEngineComponent implements OnInit, OnDestroy {
             const searchCriteria = this.flightSearchForm.value;
             let flightListLocal = [];
             flightListLocal = this.flightList.filter((flight: Flight) => {
-                console.log('flight.departDateTime: ', new Date(flight.oneWay.departDateTime).getTime());
-                console.log('searchCriteria.departDate: ', new Date(searchCriteria.departDate).getTime());
-                console.log(new Date(flight.oneWay.departDate).getTime() === new Date(searchCriteria.departDate).getTime());
 
                 const flightDepartDate = new Date(flight.oneWay.departDateTime);
                 flightDepartDate.setHours(0, 0, 0, 0);
